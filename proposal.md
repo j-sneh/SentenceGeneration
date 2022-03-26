@@ -3,7 +3,7 @@ abhakat2, apirani2, jsneh2, shlokm2
 # FINAL PROJECT PROPOSAL
 
 ## LEADING QUESTION
-How can we use graphs to identify semantic patterns within a text-based corpus?
+How can we use graphs to identify the most commonly used words within a text-based corpus?
 
 ## HIGH-LEVEL SUMMARY
 Given any text-based data (books, scripts, transcripts, etc), our program should be able to preprocess the data in such a way that it can “generate” sentences that replicate those of the corpus, based off the frequency of predecessor-successor pairs. Data input will be taken as a .txt file, and a CLI will be used for user IO. We’ll use a data processing algorithm to convert our .txt into a graph, Floyd’s algorithm to check for valid inputs, and a SSSP algorithm to determine  the “most typical” sentence starting from a given word. These sentences may not have any semantic meaning, but are simply representations of the most commonly chained-together words. This is an interesting experiment in analyzing vocabulary, and word/phrase usage, along with being a form of naive text prediction.
@@ -49,3 +49,5 @@ April 10 to April 16: Rudimentary implementation of Floyd’s.
 April 17 to April 23: Optimizing Floyd + rudimentary SSSP algorithm.
 April 23 - April 29: Optimizing all algorithms and putting them together.
 April 29 - May 6: Comprehensive testing, presentation, everything else.
+
+Link: https://docs.google.com/document/d/1fhsPDIKk3moHWt8OyXmvJJjYg_GsdeaPNXEewjFRGB0/edit
