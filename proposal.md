@@ -69,9 +69,9 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
  
 <li><strong>Output: </strong>Most likely phrase given a particular path length
  
-<li><strong>Functionality: </strong>Takes the shortest path from the given input to a period within its connected component. If the graph is cyclic, we’d ensure that cyclic branches are never taken. 
+<li><strong>Functionality: </strong>Takes the shortest path (by weight) that visits N nodes from the starting node. If the graph is cyclic (i.e one of the vertices are already visited), then we would ignore the cycle and pick the second largest weight.
  
-<li><strong>Efficiency: </strong>O(V^2) time for naive approach, O(V) space; V = number of vertices/words in graph
+<li><strong>Efficiency: </strong>O(N) time for naive approach, O(N) space; N = length of sentence
 </li> 
 </ul>
 
@@ -84,6 +84,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
  
 <li><strong>Functionality: </strong>Using a starting word, the traversal will traverse through a series of nodes determined randomly based on the edge weights. In this way, more heavily composed components would have a larger probability of being chosen next though it is not given that the most probabilistic sentence would be created. 
 </li> 
+<li><strong>Efficiency: </strong>O(N) time for naive approach, O(N) space; N = length of sentence
 </ul>
 
 <li>Breadth-First Traversal (Graph) 
@@ -103,9 +104,10 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 <ul>
 <li><strong>Input: </strong>Graph
 
-<li><strong>Output: </strong>Set of connected components
+<li><strong>Output: </strong>Set of connected components, Relative Strength of Each Component
 
 <li><strong>Purpose: </strong>Determine the groups of words in each connected component in our given graph. You can also determine the strength of each connected component by using a deterministic metric using the number of nodes and the weights of a given graph. We can do this by summing up the weights of all the edges and dividing it by the number of nodes. 
+<li><strong>Efficiency: </strong>O(V+E) time for naive approach, O(V) space; N = length of sentence
 <ul>
  
 <li>Kosaraju’s algorithm. 
