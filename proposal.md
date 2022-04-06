@@ -41,9 +41,6 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 </ul>
 </li> 
 </ul>
-<p>
-<strong><em>ALGORITHMS:</em></strong>
-</p>
 <ol>
 
 <li>Data Preprocessing (txt) 
@@ -61,6 +58,10 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 </li> 
 </ul>
 
+<p>
+<strong><em>ALGORITHMS:</em></strong>
+</p>
+ 
 <li>SSSP (Single-Source Shortest Path) (Graph) 
 <ul>
  
@@ -99,7 +100,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 </ul>
 
 <li>Connected Components
-
+<ul>
 <li><strong>Input: </strong>Graph
 
 <li><strong>Output: </strong>Set of connected components
@@ -109,6 +110,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
  
 <li>Kosaraju’s algorithm. 
 </li> 
+</ul>
 </ul>
 </li> 
 </ol>
