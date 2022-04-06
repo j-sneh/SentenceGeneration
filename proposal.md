@@ -43,7 +43,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 </ul>
 <ol>
 
-<li>Data Preprocessing (txt) 
+ Data Preprocessing (txt) 
 <ul>
  
 <li><strong>Input: </strong>.txt file
