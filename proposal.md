@@ -84,7 +84,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
  
 <li><strong>Functionality: </strong>Using a starting word, the traversal will traverse through a series of nodes determined randomly based on the edge weights. In this way, more heavily composed components would have a larger probability of being chosen next though it is not given that the most probabilistic sentence would be created. 
 </li> 
-<li><strong>Efficiency: </strong>O(N) time for greedy approach, O(N) space; N = length of sentence. O(V+E) time for all path solution O(V) space.
+<li><strong>Efficiency: </strong>O(N) time for greedy approach, O(N) space; N = length of sentence. For all path solution: O(V+E) time, O(V) space; V = words/vertices, E = edges.
 </ul>
 
 <li>Breadth-First Traversal (Graph) 
@@ -107,7 +107,7 @@ Given any text-based data (books, scripts, transcripts, etc), our program should
 <li><strong>Output: </strong>Set of connected components, Relative Strength of Each Component
 
 <li><strong>Purpose: </strong>Determine the groups of words in each connected component in our given graph. You can also determine the strength of each connected component by using a deterministic metric using the number of nodes and the weights of a given graph. We can do this by summing up the weights of all the edges and dividing it by the number of nodes. 
-<li><strong>Efficiency: </strong>O(V+E) time for naive approach, O(V) space; N = length of sentence
+<li><strong>Efficiency: </strong>O(V+E) time for naive approach, O(V) space; V = words/vertices, E = edges
 <ul>
  
 <li>Kosaraju’s algorithm. 
