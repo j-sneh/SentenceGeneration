@@ -9,20 +9,21 @@ Book5: https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/not
 Book6: https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%206%20-%20The%20Half%20Blood%20Prince.txt
 Book7: https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%207%20-%20The%20Deathly%20Hallows.txt
 '''
-
-
+import re
 from urllib.request import urlopen
+from collections import Counter
 url = "https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt"
 response = urlopen(url)
-# content = response.read().decode('utf-8')
 counter = 0
+
+f = open("parsed_book1.txt", "w")
 for line in response:
-    parse = str(response.readline().decode('utf-8').strip())
-    if(counter == 100): break
-    if(parse.startswith("Page |")): continue
-    parse.replace('.', '')
-    parse.replace(',', '')
-    print(parse)
-    counter += 1
-# for line in response:
-#     print(reponse.readline().decode('utf-8'))
+    parse = str(response.readline().decode("utf-8"))
+    if(parse.startswith("Page |")):continue
+    f.write(re.sub("[^A-Za-z0–9_ ]*","",parse))
+f.close()
+
+file = open("test.txt", "r").read().split(" ")
+most_common = Counter(file)
+
+print(most_common)
