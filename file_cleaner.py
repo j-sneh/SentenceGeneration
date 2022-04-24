@@ -20,11 +20,11 @@ f = open("parsed_book1.txt", "w")
 for line in response:
     parse = str(line.decode("utf-8")).lower()
     if(parse.startswith("page |")):continue
-    f.write(re.sub("[^a-z0–9_ ]*","",parse))
+    f.write(re.sub("[^a-z0–9_ '-]*","",parse))
 f.close()
 
-file = re.split(" +", open("parsed_book1.txt", "r").read())
+file = re.split("[ -]+", open("parsed_book1.txt", "r").read())
 most_common = Counter(file)
 
 print(sum([most_common[k] for k in most_common]))
-print(most_common.most_common(30))
+print(most_common)
