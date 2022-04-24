@@ -9,3 +9,7 @@
 ### 4/10/2022
 1. Our proposal wasn't approved, so we spent more time going over what we had to do.
 2. We found a lot of minutae that was bogging our project down, and attempted to resolve these issues on paper.
+
+### 4/17/2022
+1. We finalized our proposal and coded up some barebones test cases in python to see if our algorithm would work.
+2. Started designing our program. 
