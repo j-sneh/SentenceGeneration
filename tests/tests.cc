@@ -27,15 +27,14 @@ TEST_CASE("Non greedy test case check", "Trivial Examples") {
     Graph g ("tests/non_greedy.txt");
     test = g.HighestWeightSentence("hello", 2);
     std::cout << test << std::endl;
-    REQUIRE(test == "hello my ");
+    REQUIRE(test == "hello my.");
     test = g.HighestWeightSentence("lovely", 2);
     std::cout << test << std::endl;
-    REQUIRE(test == "lovely people ");
+    REQUIRE(test == "lovely people.");
     test = g.HighestWeightSentence("lovely", 3);
     std::cout << test << std::endl;
-    REQUIRE(test == "lovely ");
+    REQUIRE(test == "lovely.");
   }
-  
   
   
 }

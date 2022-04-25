@@ -114,19 +114,11 @@ void Graph::WriteToCSV(string filename){
 }
 string Graph::SentenceDecoder(const vector<string>& words){
     string rv = "";
-    //int tracker = 0;
     for (auto i : words){
-        // if (tracker == 0) {
-        //     rv += i[0].toupper();
-        //     rv += i.substr(1, i.length() - 1);
-        //     tracker++;
-        //     rv += " ";
-        // }
-        // else {
         rv += i;
         rv += " ";
-
-
     }
+    rv.pop_back();
+    rv.push_back('.');
     return rv;
 }
