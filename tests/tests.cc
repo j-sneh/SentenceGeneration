@@ -34,6 +34,8 @@ TEST_CASE("Non greedy test case check", "Trivial Examples") {
     test = g.HighestWeightSentence("lovely", 3);
     std::cout << test << std::endl;
     REQUIRE(test == "lovely.");
+    test = g.HighestWeightSentence("hello", 3);
+    std::cout << test << std::endl;
   }
   
   

@@ -1,6 +1,8 @@
 #include "graph.h"
 #include <iostream>
 #include <fstream>
+#include <time.h> 
+#include <stdlib.h>     /* srand, rand */
 
 /*
 
@@ -63,9 +65,17 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
 
 
     if (sentence.size() == length) {
-        if(weight >= best_weight) {
+        if(weight > best_weight) {
             best_weight = weight;
             best_sentence = sentence;
+        }
+        if(weight == best_weight){
+            srand(time(NULL));
+            int replace = rand() % 2;
+            if(replace){
+                best_weight = weight;
+                best_sentence = sentence;
+            }
         }
         visited.erase(word);
         return;
