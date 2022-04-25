@@ -8,16 +8,15 @@ int main (int argc, char** argv) {
     */
    
     if (argc < 3) {
-        std::cout << argc << argv[0] << std::endl;
-        std::cout << "give a word" << std::endl;
+        std::cout << "Usage: " <<  argv[0] << " [filename] [starting word] [length]" << std::endl;
         return 1;
     }
 
-    Graph g ("parsed_book1.txt");
+    Graph g (argv[1]);
     g.WriteToCSV("graph.csv");
     //g.ReadGraph();
     // g.PrintAdjacents(argv[1]);
 
-    std::cout << g.HighestWeightSentence(argv[1], std::stoi(argv[2])) << std::endl;
+    std::cout << g.HighestWeightSentence(argv[2], std::stoi(argv[3])) << std::endl;
 
 }
