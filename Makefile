@@ -5,17 +5,20 @@ CXXFLAGS=-std=c++20 -g -fstandalone-debug -Wall -Wextra -Werror -pedantic $(INCL
 exec: bin/exec
 tests: bin/tests
 
+
+clean:
+	rm -f bin/*
+	
 bin/exec: src/main.cc src/graph.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-bin/tests: obj/catch.o tests/tests.cc src/CharPositions.cc src/WordLocation.cc src/WordSearchSolver.cc
+bin/tests: tests/tests.cc src/graph.cc
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 obj/catch.o: tests/catch.cc
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
 .DEFAULT_GOAL := exec
-.PHONY: clean
+.PHONY: clean tests
 
-clean:
-	rm -f bin/*
+

@@ -28,4 +28,4 @@ file = re.split("[ \-]+", open("../parsed_book1.txt", "r").read())
 most_common = Counter(file)
 
 print(sum([most_common[k] for k in most_common]))
-print(most_common)
+print(most_common.most_common(30))

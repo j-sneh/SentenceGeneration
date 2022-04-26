@@ -1,6 +1,11 @@
 #include "graph.h"
 #include <iostream>
 #include <fstream>
+<<<<<<< HEAD
+=======
+#include <time.h> 
+#include <stdlib.h>     /* srand, rand */
+>>>>>>> origin/tests
 
 /*
 
@@ -63,10 +68,25 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
 
 
     if (sentence.size() == length) {
+<<<<<<< HEAD
         if(weight >= best_weight) {
             best_weight = weight;
             best_sentence = sentence;
         }
+=======
+        if(weight > best_weight) {
+            best_weight = weight;
+            best_sentence = sentence;
+        }
+        if(weight == best_weight){
+            srand(time(NULL));
+            int replace = rand() % 2;
+            if(replace){
+                best_weight = weight;
+                best_sentence = sentence;
+            }
+        }
+>>>>>>> origin/tests
         visited.erase(word);
         return;
     }
@@ -114,6 +134,7 @@ void Graph::WriteToCSV(string filename){
 }
 string Graph::SentenceDecoder(const vector<string>& words){
     string rv = "";
+<<<<<<< HEAD
     //int tracker = 0;
     for (auto i : words){
         // if (tracker == 0) {
@@ -128,5 +149,13 @@ string Graph::SentenceDecoder(const vector<string>& words){
 
 
     }
+=======
+    for (auto i : words){
+        rv += i;
+        rv += " ";
+    }
+    rv.pop_back();
+    rv.push_back('.');
+>>>>>>> origin/tests
     return rv;
 }
