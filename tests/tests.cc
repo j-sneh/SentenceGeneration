@@ -5,13 +5,13 @@
 #include <iostream>
 #include <string>
 
-TEST_CASE("Non greedy test case check", "Trivial Examples") {
+TEST_CASE("Non greedy test case check 1", "[trivial-examples]") {
   // SECTION("Can use sections") {}
   // clang-format off
 
   SECTION("Checking Size 1"){
     string test;
-    Graph g ("tests/non_greedy.txt");
+    Graph g ("tests/non_greedy1.txt");
     test = g.HighestWeightSentence("hello", 1);
     std::cout << test << std::endl;
     REQUIRE(test == "hello.");
@@ -24,7 +24,7 @@ TEST_CASE("Non greedy test case check", "Trivial Examples") {
   }
   SECTION("More complex examples"){
     string test;
-    Graph g ("tests/non_greedy.txt");
+    Graph g ("tests/non_greedy1.txt");
     test = g.HighestWeightSentence("hello", 2);
     std::cout << test << std::endl;
     REQUIRE(test == "hello my.");
@@ -37,6 +37,11 @@ TEST_CASE("Non greedy test case check", "Trivial Examples") {
     test = g.HighestWeightSentence("hello", 3);
     std::cout << test << std::endl;
   }
-  
-  
+}
+
+TEST_CASE("Non greedy test case check 2", "[complex-examples]") {
+	SECTION("Complex Example 1") {
+		Graph g ("tests/non_greedy2.txt");
+		string test = g.HighestWeightSentence()
+	}
 }
