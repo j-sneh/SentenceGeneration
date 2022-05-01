@@ -14,6 +14,7 @@ int main (int argc, char** argv) {
 
     Graph g (argv[1]);
     g.WriteToCSV("graph.csv");
+    g.WriteToCSVRunning("graph_running.csv");
     //g.ReadGraph();
     // g.PrintAdjacents(argv[1]);
 
