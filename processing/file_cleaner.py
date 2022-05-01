@@ -5,7 +5,6 @@ from urllib.request import urlopen
 from collections import Counter
 import matplotlib
 import matplotlib.pyplot as plt
-from pathlib2 import Path
 #starting with book 1
 #book URLS
 '''
@@ -29,8 +28,8 @@ class Optimize:
         self.arg_remove = ""
         arg_help = "{0} -i <input> -o <output> -r <remove>".format(argv[0])
         try:
-            opts, args = getopt.getopt(argv[1:], "hi:u:o:", ["help", "input=", 
-            "user=", "output="])
+            opts, args = getopt.getopt(argv[1:], "u:o:r:", ["help", "input=", 
+            "output=", "remove="])
         except:
             print(arg_help)
             sys.exit(2)
@@ -44,8 +43,8 @@ class Optimize:
             elif opt in ("-o", "--output"):
                 self.arg_output = arg
             elif opt in ("-r", "--remove"):
-                if (arg < 0):
-                    raise Exception("Words removed cannot be negative")
+                # if (int(arg) < 0):
+                #     raise Exception("Words removed cannot be negative")
                 self.arg_remove = arg
         
     def run(self):
@@ -78,9 +77,17 @@ class Optimize:
 
         file = re.split("[ \-]+", open(self.arg_output, "r").read())
         self.most_common = Counter(file)
-        print(self.most_common.most_common(10))
-        data = Path(self.arg_input).read_text()
-        print(data[:10])
+        #print(self.most_common.most_common(10))
+        # data = urlopen(self.arg_output).read()
+        # print(data[:10])
+
+        with open(self.arg_output, 'r') as file :
+            data = file.read()
+        for key, value in self.most_common.most_common(int(self.arg_remove)):
+            data = data.replace(" " + key + " ", " ")
+        with open(self.arg_output, 'w') as file:
+            file.write(data)
+
 
     def display_words(self):
         sorted_vals = list(zip(*self.most_common.most_common(100)))

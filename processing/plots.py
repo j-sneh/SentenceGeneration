@@ -32,6 +32,7 @@ f.close()
 file = re.split("[ \-]+", open("parsed_book1.txt", "r").read())
 most_common = Counter(file)
 
+
 # STARTING HERE
 sorted_vals = list(zip(*most_common.most_common(100)))
 

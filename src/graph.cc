@@ -17,28 +17,54 @@ Graph::Graph(string filename) {
     text >> prev; // Skip the first element
     size_t counter = 0;
     while(text >> curr){
-        //if(counter == 50) break;
+        // if(counter == 50) break;
         if(!graph.count(prev)){ // key does not exist in map
             graph[prev] = Word();
             graph[prev].word = prev;
             
         }
+        
+        vector< std::pair<string, size_t> >& adj = graph[prev].adjacents;
 
-        graph[prev].adjacents[curr] += 1;
+        auto word_iter = std::find_if(adj.begin(), adj.end(), [curr](std::pair<string, size_t> p) {return p.first == curr;});
+        
+        if (word_iter == adj.end()) {
+            adj.push_back(std::make_pair(curr, 1));
+        } else {
+            word_iter->second += 1;
+        }
+        // graph[prev].adjacents[curr] += 1;
+        
         prev = curr;
         counter ++;
     }
 
-    text.close();
+    for (auto &it : graph) {
+        vector<pair<string, size_t>>& v = it.second.adjacents;
+        std::sort(v.begin(), v.end(), 
+            [](const pair<string, size_t> & a, const pair<string, size_t> & b)
+        { 
+            return a.second > b.second; 
+        });
 
-    for (const auto& pair : graph) {
-        Word word_info = pair.second;
-        word_info.highest_weight = 0;
-        for (const auto& word_weight : word_info.adjacents) {
-            size_t weight = word_weight.second;
-            word_info.highest_weight = weight < word_info.highest_weight ? word_info.highest_weight : weight;
-        } 
     }
+
+    for(auto &it: graph){
+        for(auto& elements: it.second.adjacents){
+            it.second.buckets.push_back(elements);
+        }
+    }
+    
+    for(auto &it : graph){
+        size_t running_sum = 0;
+        for(auto &i: it.second.buckets){
+            i.second += running_sum;
+            running_sum = i.second;
+        }
+    }
+    
+
+    text.close();
 }
 
 
@@ -63,31 +89,26 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
 
     visited.insert(word);
 
+    if (weight > best_weight) {
+        best_weight = weight;
+        best_sentence = sentence;
+    }
+
 
     if (sentence.size() == length) {
-        if(weight > best_weight) {
-            best_weight = weight;
-            best_sentence = sentence;
-        }
-        if(weight == best_weight){
-            srand(time(NULL));
-            int replace = rand() % 2;
-            if(replace){
-                best_weight = weight;
-                best_sentence = sentence;
-            }
-        }
         visited.erase(word);
         return;
     }
 
     Word info = graph[word];
+    int counter = 0;
     for (const auto& pair : info.adjacents) {
+        if (counter++ == info.buckets.back().second/5) {
+            break;
+        }
+
         string new_word = pair.first;
         size_t delta_weight = pair.second;
-
-        if (delta_weight < 0.25 * info.highest_weight)
-            continue;
 
         sentence.push_back(new_word);
         BacktrackHelper(new_word, sentence, weight + delta_weight, length, best_sentence, best_weight);
@@ -122,6 +143,18 @@ void Graph::WriteToCSV(string filename){
         text << "\n";
      }
 }
+void Graph::WriteToCSVRunning(string filename){
+     std::ofstream text;
+     text.open(filename);
+     for(auto i: graph){
+        text << "element: " << i.first << "\n";
+        for(auto& pair : graph[i.first].buckets){
+
+            text << pair.first << ": " <<  pair.second << " " ;
+        }
+        text << "\n";
+     }
+}
 string Graph::SentenceDecoder(const vector<string>& words){
     string rv = "";
     for (auto i : words){
@@ -131,4 +164,11 @@ string Graph::SentenceDecoder(const vector<string>& words){
     rv.pop_back();
     rv.push_back('.');
     return rv;
+}
+
+string Graph::ProbabilisticSentence(string word, size_t length){
+    std::cout << word << std::endl;
+    std::cout << length << std::endl; 
+    
+    return "";
 }
