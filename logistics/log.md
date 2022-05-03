@@ -21,3 +21,10 @@ We made significant progress this week for our assignment:
 3. Worked on our backtracking algorithm, which we realized is very very slow (like, exponentially slow for small numbers even). We're attempting to develop heuristics, but may move to greedy algorithm for speed + results.
 4. We started brainstorming and planning for "buckets" with probability.
 5. We wrote some tests
+
+### 5/1/2022
+We continued making progress, and are nearly complete with the project:
+1. We cleaned up our Word object, and replaced the adjacency map with a sorted adjacency list - this allowed us to optimally generate most/least common words in our backtracking algorithm.
+2. We generated graphs of the most common words, through which we were able to visualize the power law at play.
+3. We updated the prepreprocessing to eliminate stop words, which mitigaes the impact of the power law within words.
+4. We added our buckets for the probabilistic algorithm and had discussions on where we want to generate random behavior.
