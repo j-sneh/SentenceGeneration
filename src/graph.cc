@@ -2,67 +2,56 @@
 #include <iostream>
 #include <fstream>
 #include <time.h> 
-#include <stdlib.h>     /* srand, rand */
+#include <stdlib.h>
+#include <stdexcept>
 
-/*
-
-*/
 Graph::Graph(string filename) {
     std::ifstream text(filename);
 
-    if(!text.is_open()) throw std::runtime_error("Cannot be opened");
-    
+    if(!text.is_open()){
+        throw std::runtime_error("Cannot be opened");
+    }
+
     string prev;
     string curr;
     text >> prev; // Skip the first element
-    size_t counter = 0;
     while(text >> curr){
-        // if(counter == 50) break;
         if(!graph.count(prev)){ // key does not exist in map
             graph[prev] = Word();
-            graph[prev].word = prev;
-            
+            graph[prev].word = prev;  
         }
         
         vector< std::pair<string, size_t> >& adj = graph[prev].adjacents;
 
-        auto word_iter = std::find_if(adj.begin(), adj.end(), [curr](std::pair<string, size_t> p) {return p.first == curr;});
+        //Return an iterator pointing to the element in the adjacents such that the word is equal to current 
+        auto word_iter = std::find_if(adj.begin(), adj.end(), 
+                                    [curr](std::pair<string, size_t> p) {return p.first == curr;});
         
         if (word_iter == adj.end()) {
             adj.push_back(std::make_pair(curr, 1));
         } else {
             word_iter->second += 1;
         }
-        // graph[prev].adjacents[curr] += 1;
-        
         prev = curr;
-        counter ++;
     }
 
+    // Sort each individual vector in the adjacency list by frequency
     for (auto &it : graph) {
         vector<pair<string, size_t>>& v = it.second.adjacents;
         std::sort(v.begin(), v.end(), 
-            [](const pair<string, size_t> & a, const pair<string, size_t> & b)
-        { 
+            [](const pair<string, size_t> & a, const pair<string, size_t> & b){ 
             return a.second > b.second; 
         });
-
     }
 
     for(auto &it: graph){
-        for(auto& elements: it.second.adjacents){
-            it.second.buckets.push_back(elements);
-        }
-    }
-    
-    for(auto &it : graph){
+        it.second.buckets = it.second.adjacents;
         size_t running_sum = 0;
         for(auto &i: it.second.buckets){
             i.second += running_sum;
             running_sum = i.second;
         }
     }
-    
 
     text.close();
 }
@@ -137,7 +126,6 @@ void Graph::WriteToCSV(string filename){
      for(auto i: graph){
         text << "element: " << i.first << "\n";
         for(auto& pair : graph[i.first].adjacents){
-
             text << pair.first << ": " <<  pair.second << " " ;
         }
         text << "\n";
@@ -155,11 +143,40 @@ void Graph::WriteToCSVRunning(string filename){
         text << "\n";
      }
 }
+
+void Graph::WriteAsBFS(string filename, string start) {
+    std::ofstream text;
+    text.open(filename);
+
+    Word curr = graph[start];
+    unordered_set < string > visited;
+    queue <Word> to_visit;
+
+    to_visit.push(curr);
+
+    while (!to_visit.empty()) {
+        curr = to_visit.front();
+        to_visit.pop();
+
+        for (pair<string, size_t>& word_and_weight : curr.adjacents) {
+            string w = word_and_weight.first;
+            if (!visited.count(w)){
+                text << "{" << w << ", " << word_and_weight.second << "}" << " ";
+                visited.insert(w);
+                to_visit.push(graph[w]);
+            } else {
+                 text << "(" << w << ", " << word_and_weight.second << ")" << " ";
+            }
+        }
+
+        text << std::endl;
+    }
+}
+
 string Graph::SentenceDecoder(const vector<string>& words){
     string rv = "";
-    for (auto i : words){
-        rv += i;
-        rv += " ";
+    for (const auto& i : words){
+        rv += i + " ";
     }
     rv.pop_back();
     rv.push_back('.');
@@ -167,27 +184,65 @@ string Graph::SentenceDecoder(const vector<string>& words){
 }
 
 string Graph::ProbabilisticSentence(string word, size_t length){
-    std::cout << word << std::endl;
-    std::cout << length << std::endl;
-    for(size_t count = 0; count < length; ++count){
-        int bucket_length = graph[word].buckets.back().second;
+    vector<string> rv;
+    rv.push_back(word);
+    
+    srand(time(NULL));
+    srand(rand());
 
-        srand(time(NULL));
+    for(size_t count = 0; count < length - 1; ++count){
+        Word& curr_word = graph[word];
+        vector< pair<string, size_t> >& curr_buckets = curr_word.buckets;
 
-        unsigned long bucket = rand() % bucket_length;
-
-        int chosen_index = -1;
-        for(unsigned int i = 0; i < graph[word].buckets.size(); ++i){
-            if(graph[word].buckets[i].second >= bucket){
-                chosen_index = i;
+        int bucket_length = curr_buckets.back().second; // size of cumulative sum of frequencies
+        unsigned long bucket = (rand() % bucket_length)+1;
+        for(unsigned int i = 0; i < curr_buckets.size(); ++i){
+            if (curr_buckets[i].second >= bucket){
+                word = curr_buckets[i].first;
+                rv.push_back(word);
+                break;
             }
         }
-
-        if(chosen_index == -1) std::cout << "Broken test case";
         
-        word = graph[word].buckets[chosen_index].first;
     }
+    return SentenceDecoder(rv);
+}
 
-    std::cout << word << std::endl; 
-    return word;
+string Graph::HighestGreedySentence(string word, size_t length) {
+	string curr = word;
+	std::vector<string> v;
+
+	while (!graph[curr].adjacents.empty() && length--) {
+		v.push_back(curr);
+		curr = graph[curr].adjacents.front().first;
+	}
+
+	return SentenceDecoder(v);
+}
+
+string Graph::LowestGreedySentence(string word, size_t length) {
+	string curr = word;
+	std::vector<string> v;
+
+	while (!graph[curr].adjacents.empty() && length--) {
+		v.push_back(curr);
+		curr = graph[curr].adjacents.back().first;
+	}
+
+	return SentenceDecoder(v);
+}
+
+string Graph::RandomSentence(string word, size_t length) {
+	string curr = word;
+	std::vector<string> v;
+    srand(time(NULL));
+    srand(rand());
+
+	while (!graph[curr].adjacents.empty() && length--) {
+		v.push_back(curr);
+        int index = rand() % graph[curr].adjacents.size();
+		curr = graph[curr].adjacents[index].first;
+	}
+
+	return SentenceDecoder(v);
 }

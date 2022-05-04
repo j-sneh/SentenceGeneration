@@ -3,12 +3,15 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <queue>
 
 using std::vector;
 using std::unordered_map;
+using std::unordered_set;
 using std::map;
 using std::string;
 using std::pair;
+using std::queue;
 
 
 /*
@@ -46,9 +49,15 @@ public:
     */
     string ProbabilisticSentence(string word, size_t length);
 
+    string HighestGreedySentence(string word, size_t length);
+    string LowestGreedySentence(string word, size_t length);
+
+    string RandomSentence(string word, size_t length);
+
     void PrintAdjacents(string word);
     void WriteToCSV(string filename);
     void WriteToCSVRunning(string filename);
+    void WriteAsBFS(string filename, string start);
 
 private:
     void BacktrackHelper(const string& word, vector<string>& sentence,size_t weight, size_t length, vector<string>& best_sentence, size_t& best_weight);
