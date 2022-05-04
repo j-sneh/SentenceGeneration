@@ -188,7 +188,6 @@ string Graph::ProbabilisticSentence(string word, size_t length){
         word = graph[word].buckets[chosen_index].first;
     }
 
-
     std::cout << word << std::endl; 
     return word;
 }
