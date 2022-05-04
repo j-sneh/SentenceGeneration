@@ -168,7 +168,27 @@ string Graph::SentenceDecoder(const vector<string>& words){
 
 string Graph::ProbabilisticSentence(string word, size_t length){
     std::cout << word << std::endl;
-    std::cout << length << std::endl; 
-    
-    return "";
+    std::cout << length << std::endl;
+    for(size_t count = 0; count < length; ++count){
+        int bucket_length = graph[word].buckets.back().second;
+
+        srand(time(NULL));
+
+        unsigned long bucket = rand() % bucket_length;
+
+        int chosen_index = -1;
+        for(unsigned int i = 0; i < graph[word].buckets.size(); ++i){
+            if(graph[word].buckets[i].second >= bucket){
+                chosen_index = i;
+            }
+        }
+
+        if(chosen_index == -1) std::cout << "Broken test case";
+        
+        word = graph[word].buckets[chosen_index].first;
+    }
+
+
+    std::cout << word << std::endl; 
+    return word;
 }
