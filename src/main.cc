@@ -20,7 +20,7 @@ int main (int argc, char** argv) {
     srand(rand());
 
     //Graph g (argv[1]);
-    Graph g ("tests/non_greedy1.txt");
+    Graph g ("tests/non_greedy2.txt");
     // std::cout <<  g.LowestGreedySentence("hello", 3) << std::endl;
     // std::cout <<  g.LowestGreedySentence("my", 4) << std::endl;
     // std::cout <<  g.LowestGreedySentence("dear", 5) << std::endl;
@@ -30,7 +30,7 @@ int main (int argc, char** argv) {
     //g.ReadGraph();
     // g.PrintAdjacents(argv[1]);
 
-    std::cout << g.HighestWeightSentence("hello", 3) << std::endl;
+    std::cout << g.HighestWeightSentence("my", 3) << std::endl;
     // std::cout << g->ProbabilisticSentence("harry", 20) << std::endl;
     // std::cout << g.HighestWeightSentence("hello", 1);
     // std::cout << g.HighestWeightSentence("hello", 2);
@@ -38,7 +38,8 @@ int main (int argc, char** argv) {
     // std::cout << g.HighestWeightSentence("hello", 4);
     
     // std::cout << g.HighestGreedySentence("yer", 4) << std::endl;
-    //g->WriteAsBFS("bfs_test.txt", "harry");
+    // g.WriteAsBFS("bfs_test.txt", "sleep");
+    // g.WriteAsBFS("bfs_test.txt", "hello");
     // std::cout << g->LowestGreedySentence("harry", 20) << std::endl;
 
 }

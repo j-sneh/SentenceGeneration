@@ -59,16 +59,16 @@ Graph::Graph(string filename) {
 
 string Graph::HighestWeightSentence(string word, size_t length) {
     if (length == 1) return word + ".";
-    vector<string> sentence = {word};
-    vector<string> best_sentence = sentence;
+    vector<string> initial = {word};
+    vector<string> sentence = initial;
     size_t best_weight = 0;
     
-    BacktrackHelper(word, sentence, best_weight, length, best_sentence, best_weight);
+    BacktrackHelper(word, initial, best_weight, length, sentence, best_weight);
 
-    std::cout << length << std::endl;
     visited.clear();
+
     if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
-    return SentenceDecoder(best_sentence);
+    return SentenceDecoder(sentence);
 }
 
 void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t weight, size_t length, vector<string>& best_sentence, size_t& best_weight) {
@@ -87,13 +87,8 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
          return;
      }
 
-    Word info = graph[word];
-    int counter = 0;
+    Word& info = graph[word];
     for (const auto& pair : info.adjacents) {
-        if (counter++ == info.buckets.back().second/5) {
-            break;
-        }
-
         string new_word = pair.first;
         size_t delta_weight = pair.second;
 
@@ -140,7 +135,6 @@ void Graph::WriteAsBFS(string filename, string start) {
     Word curr = graph[start];
     unordered_set < string > visited;
     
-    // queue <Word> to_visit;
     queue< std::pair< Word, size_t> > to_visit;
 
     to_visit.push({curr, 0});
@@ -156,23 +150,24 @@ void Graph::WriteAsBFS(string filename, string start) {
         to_visit.pop();
 
         if (d != curr_depth) {
-            text << "The following nodes appear at depth " << d << ": \n";
+            text << std::endl;
+            text << "\nThe following words first appear at depth " << d+1 << ": \n";
+            curr_depth = d;
+        }
+
+        if (visited.count(curr.word)) {
+            continue;
+        } else {
+            visited.insert(curr.word);
+            text << curr.word << " ";
         }
 
         for (pair<string, size_t>& word_and_weight : curr.adjacents) {
             string w = word_and_weight.first;
-            text << w << " ";
-            if (!visited.count(w)){
-                // text << "{" << w << ", " << word_and_weight.second << "}" << " ";
-                visited.insert(w);
-                to_visit.push({graph[w], d + 1});
-            } else {
-                //  text << "(" << w << ", " << word_and_weight.second << ")" << " ";
-            }
+            to_visit.push({graph[w], d + 1});
         }
-
-        text << std::endl;
     }
+    visited.clear();
 }
 
 string Graph::SentenceDecoder(const vector<string>& words){

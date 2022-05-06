@@ -80,7 +80,7 @@ public:
     void WriteToCSVRunning(string filename);
     /*
     WriteAsBFS:
-    
+    Uses a BFS to display the entire graph
     */
     void WriteAsBFS(string filename, string start);
 
