@@ -27,7 +27,7 @@ int main (int argc, char** argv) {
     //g.ReadGraph();
     // g.PrintAdjacents(argv[1]);
 
-    std::cout << g.HighestWeightSentence("lovely", 3) << std::endl;
+    std::cout << g.HighestWeightSentence("hello", 3) << std::endl;
     // std::cout << g->ProbabilisticSentence("harry", 20) << std::endl;
     // std::cout << g.HighestWeightSentence("hello", 1);
     // std::cout << g.HighestWeightSentence("hello", 2);

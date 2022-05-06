@@ -48,15 +48,40 @@ public:
     Takes a given length and uses a random to dictate which word to go to next in a phrase using weighted probability
     */
     string ProbabilisticSentence(string word, size_t length);
-
+    /*
+    HighestGreedySentence:
+    For each word it takes the word with the highest edge weight and chooses that as the next word until it creates a sentence of length, length
+    In case of a tie with edge weights, the word that appears in the text first is chosen.
+    */
     string HighestGreedySentence(string word, size_t length);
+    /*
+    LowestGreedySentence:
+    For each word it takes the word with the least edge weight and chooses the next woord until it creates a sentence of length, length
+    In case of a tie with edge weights, the word that appears in the text last  is chosen
+    */
     string LowestGreedySentence(string word, size_t length);
-
+    /*
+    Random Sentence:
+    Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
+    */
     string RandomSentence(string word, size_t length);
 
-    void PrintAdjacents(string word);
+    /*
+    WriteToCSV:
+    Creates a CSV that displays each word in the form of"element: " and below each word displays its respective adjancency list sorted from larger
+    to lower frequency 
+    */
     void WriteToCSV(string filename);
+    /*
+    WriteToCSVRunning:
+    Creates a CSV that displays the adjancency list of a given element sorted from thr largest to smallest frequencies, but written as a prefix sum to
+    aid with creating buckets and our Probabilistic Sentence calculation.
+    */
     void WriteToCSVRunning(string filename);
+    /*
+    WriteAsBFS:
+    
+    */
     void WriteAsBFS(string filename, string start);
 
 private:

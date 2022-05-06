@@ -38,7 +38,7 @@ Graph::Graph(string filename) {
     // Sort each individual vector in the adjacency list by frequency
     for (auto &it : graph) {
         vector<pair<string, size_t>>& v = it.second.adjacents;
-        std::sort(v.begin(), v.end(), 
+        std::stable_sort(v.begin(), v.end(), 
             [](const pair<string, size_t> & a, const pair<string, size_t> & b){ 
             return a.second > b.second; 
         });
@@ -86,7 +86,6 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
          return;
      }
 
-
     Word info = graph[word];
     int counter = 0;
     for (const auto& pair : info.adjacents) {
@@ -105,15 +104,6 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
     if (visited.count(word)) {
         visited.erase(word);
         return;
-    }
-    
-}
-
-void Graph::PrintAdjacents(string word) {
-    Word word_info = graph[word];
-
-    for (auto& pair : word_info.adjacents) {
-        std::cout << pair.first << " " << pair.second << std::endl;
     }
     
 }
@@ -172,18 +162,18 @@ void Graph::WriteAsBFS(string filename, string start) {
 }
 
 string Graph::SentenceDecoder(const vector<string>& words){
-    string rv = "";
+    string sentence = "";
     for (const auto& i : words){
-        rv += i + " ";
+        sentence += i + " ";
     }
-    rv.pop_back();
-    rv.push_back('.');
-    return rv;
+    sentence.pop_back();
+    sentence.push_back('.');
+    return sentence;
 }
 
 string Graph::ProbabilisticSentence(string word, size_t length){
-    vector<string> rv;
-    rv.push_back(word);
+    vector<string> sentences;
+    sentence.push_back(word);
     
     srand(time(NULL));
     srand(rand());
@@ -197,50 +187,50 @@ string Graph::ProbabilisticSentence(string word, size_t length){
         for(unsigned int i = 0; i < curr_buckets.size(); ++i){
             if (curr_buckets[i].second >= bucket){
                 word = curr_buckets[i].first;
-                rv.push_back(word);
+                sentence.push_back(word);
                 break;
             }
         }
         
     }
-    return SentenceDecoder(rv);
+    return SentenceDecoder(sentence);
 }
 
 string Graph::HighestGreedySentence(string word, size_t length) {
 	string curr = word;
-	std::vector<string> v;
+	std::vector<string> sentence;
 
 	while (!graph[curr].adjacents.empty() && length--) {
-		v.push_back(curr);
+		sentence.push_back(curr);
 		curr = graph[curr].adjacents.front().first;
 	}
 
-	return SentenceDecoder(v);
+	return SentenceDecoder(sentence);
 }
 
 string Graph::LowestGreedySentence(string word, size_t length) {
 	string curr = word;
-	std::vector<string> v;
+	std::vector<string> sentence;
 
 	while (!graph[curr].adjacents.empty() && length--) {
-		v.push_back(curr);
+		sentence.push_back(curr);
 		curr = graph[curr].adjacents.back().first;
 	}
 
-	return SentenceDecoder(v);
+	return SentenceDecoder(sentence);
 }
 
 string Graph::RandomSentence(string word, size_t length) {
 	string curr = word;
-	std::vector<string> v;
+	std::vector<string> sentence;
     srand(time(NULL));
     srand(rand());
 
 	while (!graph[curr].adjacents.empty() && length--) {
-		v.push_back(curr);
+		sentence.push_back(curr);
         int index = rand() % graph[curr].adjacents.size();
 		curr = graph[curr].adjacents[index].first;
 	}
 
-	return SentenceDecoder(v);
+	return SentenceDecoder(sentence);
 }

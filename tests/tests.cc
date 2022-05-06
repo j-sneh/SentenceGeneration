@@ -8,40 +8,44 @@
 TEST_CASE("Highest Weight Sentence - easy", "[easy]") {
   string test;
   Graph g ("tests/non_greedy1.txt");
+  
   test = g.HighestWeightSentence("hello", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "hello.");
+  
   test = g.HighestWeightSentence("my", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "my.");
+  
   test = g.HighestWeightSentence("dear", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "dear.");
 
 }
 TEST_CASE("Highest Weight Sentence - normal", "[normal]"){
   string test;
   Graph g ("tests/non_greedy1.txt");
+  
   test = g.HighestWeightSentence("hello", 2);
-  std::cout << test << std::endl;
   REQUIRE(test == "hello my.");
+  
   test = g.HighestWeightSentence("lovely", 2);
-  std::cout << test << std::endl;
   REQUIRE(test == "lovely people.");
+  
   test = g.HighestWeightSentence("lovely", 3);
-  std::cout << test << std::endl;
-  //REQUIRE(test == "lovely.");
+  REQUIRE(test == "lovely.");
+  
   test = g.HighestWeightSentence("hello", 3);
-  std::cout << test << std::endl;
+  REQUIRE(test == "hello.");
 }
 
 TEST_CASE("Highest Greedy Sentence - easy", "[easy]"){
   string test;
   Graph g ("tests/non_greedy1.txt");
+  
   test = g.HighestWeightSentence("hello", 1);
   REQUIRE(test == "hello.");
+  
   test = g.HighestWeightSentence("my", 1);
   REQUIRE(test == "my.");
+  
   test = g.HighestWeightSentence("dear", 1);
   REQUIRE(test == "dear.");
 }
@@ -84,11 +88,20 @@ TEST_CASE("Highest Greedy Sentence 2 - normal", "[normal]"){
 TEST_CASE("Lowest Greedy Sentence - normal", "[normal]"){
   string test;
   Graph g ("tests/non_greedy2.txt");
-  string test;
+
   test =  g.LowestGreedySentence("hello", 3);
   REQUIRE(test == "hello lovely people.");
+  
   test =  g.LowestGreedySentence("my", 4);
   REQUIRE(test == "my dear hello lovely.");
+  
   test =  g.LowestGreedySentence("dear", 5);
   REQUIRE(test == "dear hello lovely people lovely.");
+}
+
+TEST_CASE("Test Random Sentence - normal", "[normal]"){
+  string test;
+  Graph g ("tests/non_greedy2.txt");
+  //since random sentence can have any characters in the adjacency list it has no deterministic metric.
+  test = g.
 }
