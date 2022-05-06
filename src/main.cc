@@ -25,7 +25,7 @@ int main (int argc, char** argv) {
     // std::cout <<  g.LowestGreedySentence("my", 4) << std::endl;
     // std::cout <<  g.LowestGreedySentence("dear", 5) << std::endl;
     // Graph *g = new Graph("processing/parsed_book.txt");
-    // g.WriteToCSV("graph.csv");
+    // g->WriteToCSV("display_greed1.csv");
     // g.WriteToCSVRunning("graph_running.csv");
     //g.ReadGraph();
     // g.PrintAdjacents(argv[1]);
