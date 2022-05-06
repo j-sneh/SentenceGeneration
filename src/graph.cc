@@ -67,6 +67,7 @@ string Graph::HighestWeightSentence(string word, size_t length) {
 
     std::cout << length << std::endl;
     visited.clear();
+    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
     return SentenceDecoder(best_sentence);
 }
 
@@ -172,7 +173,7 @@ string Graph::SentenceDecoder(const vector<string>& words){
 }
 
 string Graph::ProbabilisticSentence(string word, size_t length){
-    vector<string> sentences;
+    vector<string> sentence;
     sentence.push_back(word);
     
     srand(time(NULL));
@@ -193,6 +194,7 @@ string Graph::ProbabilisticSentence(string word, size_t length){
         }
         
     }
+    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
     return SentenceDecoder(sentence);
 }
 
@@ -205,6 +207,7 @@ string Graph::HighestGreedySentence(string word, size_t length) {
 		curr = graph[curr].adjacents.front().first;
 	}
 
+    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
 	return SentenceDecoder(sentence);
 }
 
@@ -216,7 +219,7 @@ string Graph::LowestGreedySentence(string word, size_t length) {
 		sentence.push_back(curr);
 		curr = graph[curr].adjacents.back().first;
 	}
-
+    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
 	return SentenceDecoder(sentence);
 }
 
@@ -231,6 +234,7 @@ string Graph::RandomSentence(string word, size_t length) {
         int index = rand() % graph[curr].adjacents.size();
 		curr = graph[curr].adjacents[index].first;
 	}
-
+    
+    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
 	return SentenceDecoder(sentence);
 }

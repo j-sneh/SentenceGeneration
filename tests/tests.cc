@@ -98,10 +98,3 @@ TEST_CASE("Lowest Greedy Sentence - normal", "[normal]"){
   test =  g.LowestGreedySentence("dear", 5);
   REQUIRE(test == "dear hello lovely people lovely.");
 }
-
-TEST_CASE("Test Random Sentence - normal", "[normal]"){
-  string test;
-  Graph g ("tests/non_greedy2.txt");
-  //since random sentence can have any characters in the adjacency list it has no deterministic metric.
-  test = g.
-}
