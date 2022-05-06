@@ -20,5 +20,3 @@ obj/catch.o: tests/catch.cc
 
 .DEFAULT_GOAL := exec
 .PHONY: clean tests
-
-

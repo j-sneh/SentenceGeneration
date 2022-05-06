@@ -77,17 +77,15 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
     }
 
     visited.insert(word);
-
-    if (weight > best_weight) {
-        best_weight = weight;
-        best_sentence = sentence;
-    }
-
-
     if (sentence.size() == length) {
-        visited.erase(word);
-        return;
-    }
+         if(weight >= best_weight) {
+             best_weight = weight;
+             best_sentence = sentence;
+         }
+         visited.erase(word);
+         return;
+     }
+
 
     Word info = graph[word];
     int counter = 0;
