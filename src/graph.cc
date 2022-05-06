@@ -139,22 +139,35 @@ void Graph::WriteAsBFS(string filename, string start) {
 
     Word curr = graph[start];
     unordered_set < string > visited;
-    queue <Word> to_visit;
+    
+    // queue <Word> to_visit;
+    queue< std::pair< Word, size_t> > to_visit;
 
-    to_visit.push(curr);
+    to_visit.push({curr, 0});
+
+    size_t curr_depth = 1;
 
     while (!to_visit.empty()) {
-        curr = to_visit.front();
+        std::pair<Word, size_t> p = to_visit.front();
+
+        curr = p.first;
+        size_t d = p.second;
+        
         to_visit.pop();
+
+        if (d != curr_depth) {
+            text << "The following nodes appear at depth " << d << ": \n";
+        }
 
         for (pair<string, size_t>& word_and_weight : curr.adjacents) {
             string w = word_and_weight.first;
+            text << w << " ";
             if (!visited.count(w)){
-                text << "{" << w << ", " << word_and_weight.second << "}" << " ";
+                // text << "{" << w << ", " << word_and_weight.second << "}" << " ";
                 visited.insert(w);
-                to_visit.push(graph[w]);
+                to_visit.push({graph[w], d + 1});
             } else {
-                 text << "(" << w << ", " << word_and_weight.second << ")" << " ";
+                //  text << "(" << w << ", " << word_and_weight.second << ")" << " ";
             }
         }
 
@@ -198,8 +211,9 @@ string Graph::ProbabilisticSentence(string word, size_t length){
 string Graph::HighestGreedySentence(string word, size_t length) {
 	string curr = word;
 	std::vector<string> sentence;
+    size_t num_left = length;
 
-	while (!graph[curr].adjacents.empty() && length--) {
+	while (!graph[curr].adjacents.empty() && num_left--) {
 		sentence.push_back(curr);
 		curr = graph[curr].adjacents.front().first;
 	}
@@ -211,8 +225,9 @@ string Graph::HighestGreedySentence(string word, size_t length) {
 string Graph::LowestGreedySentence(string word, size_t length) {
 	string curr = word;
 	std::vector<string> sentence;
+    size_t num_left = length;
 
-	while (!graph[curr].adjacents.empty() && length--) {
+	while (!graph[curr].adjacents.empty() && num_left--) {
 		sentence.push_back(curr);
 		curr = graph[curr].adjacents.back().first;
 	}
@@ -223,8 +238,9 @@ string Graph::LowestGreedySentence(string word, size_t length) {
 string Graph::RandomSentence(string word, size_t length) {
 	string curr = word;
 	std::vector<string> sentence;
+    size_t num_left = length;
 
-	while (!graph[curr].adjacents.empty() && length--) {
+	while (!graph[curr].adjacents.empty() && num_left--) {
 		sentence.push_back(curr);
         int index = rand() % graph[curr].adjacents.size();
 		curr = graph[curr].adjacents[index].first;
