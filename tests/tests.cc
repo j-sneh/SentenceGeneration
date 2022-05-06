@@ -98,3 +98,16 @@ TEST_CASE("Lowest Greedy Sentence - normal", "[normal]"){
   test =  g.LowestGreedySentence("dear", 5);
   REQUIRE(test == "dear hello lovely people lovely.");
 }
+
+TEST_CASE("Random Sentence", "[normal]"){
+  string test;
+  Graph g("tests/non_greedy1.txt");
+  int size = 4;
+  test = g.RandomSentence("hello", size);
+  REQUIRE(test.size() == size);
+  //Check if each successive element is part of the prior adjacency list
+  for(unsigned int i = 0; i < size -1 ; ++i){
+    
+    //word = test[i].
+  }
+}

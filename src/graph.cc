@@ -67,7 +67,7 @@ string Graph::HighestWeightSentence(string word, size_t length) {
 
     std::cout << length << std::endl;
     visited.clear();
-    if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
+    //if (sentence.size() != length) return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
     return SentenceDecoder(best_sentence);
 }
 
