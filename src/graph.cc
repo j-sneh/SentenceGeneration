@@ -175,9 +175,6 @@ string Graph::SentenceDecoder(const vector<string>& words){
 string Graph::ProbabilisticSentence(string word, size_t length){
     vector<string> sentence;
     sentence.push_back(word);
-    
-    srand(time(NULL));
-    srand(rand());
 
     for(size_t count = 0; count < length - 1; ++count){
         Word& curr_word = graph[word];
@@ -226,8 +223,6 @@ string Graph::LowestGreedySentence(string word, size_t length) {
 string Graph::RandomSentence(string word, size_t length) {
 	string curr = word;
 	std::vector<string> sentence;
-    srand(time(NULL));
-    srand(rand());
 
 	while (!graph[curr].adjacents.empty() && length--) {
 		sentence.push_back(curr);

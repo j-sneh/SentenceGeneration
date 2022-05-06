@@ -16,6 +16,9 @@ int main (int argc, char** argv) {
     //     return 1;
     // }
 
+    srand(time(NULL));
+    srand(rand());
+
     //Graph g (argv[1]);
     Graph g ("tests/non_greedy1.txt");
     // std::cout <<  g.LowestGreedySentence("hello", 3) << std::endl;
