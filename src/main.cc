@@ -38,7 +38,7 @@ int main (int argc, char** argv) {
     help();
 
     while (true) {
-        if ()
+
 
     }
     // std::cout <<  g.LowestGreedySentence("hello", 3) << std::endl;
