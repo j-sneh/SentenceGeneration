@@ -3,6 +3,9 @@
 
 <br>
 <h2> Running the Code </h2>
+
+Run <code>mkdir bin</code> in the root directory.
+
 Compile the program with <code>make</code> in the root directory. 
 
 The program should be run on a text file that only contains words and numbers and is space-delimited, with the following command: <code>./bin/exec [arg1]</code>, where <code>[arg1]</code> represents the filepath of the text file to be run on. If there is no argument, then the text defaults to <code>parsed_book1.txt</code>, which is the first Harry Potter book.
@@ -12,7 +15,9 @@ The program should be run on a text file that only contains words and numbers an
 <h2> Development Process </h2>
 
 <h3> Preprocessing </h3>
-Our preprocessor written in <code>processing/file_cleaner.py</code> is applied in the source available at this url <code> https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt </code>, but it can be applied to any text file. Our post-processed version of the first book is available at <code>processing/parsed_book.txt</code>.
+Our preprocessor written in <code>processing/file_cleaner.py</code> is applied in the source available at this url <code> https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt </code>, but it can be applied to any text file. It removes all non alphanumeric characters. Our post-processed version of the first book is available at <code>processing/parsed_book.txt</code>.
+
+You can run it using <code>python3 file_cleaner.py -i [input_file] -o [ouput_file] -r [number of common words to remove]</code>. Note that this doesn't run on ews due to the lack of support for common libraries (urllib.request).
 
 <br>
 
