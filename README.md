@@ -31,10 +31,10 @@ We explored various methods of generating phrases/sentences of a given path leng
     Takes a given length and uses a random to dictate which word to go to next in a phrase using weighted probability.
     
 <li> <b> HighestGreedySentence: </b>
-    For each word it takes the word with the highest edge weight and chooses that as the next word until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text first is chosen.
+    For each word, this algorithm takes the word with the highest edge weight and chooses that as the next word until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text first is chosen.
     
 <li><b>LowestGreedySentence:</b>
-    For each word it takes the word with the least edge weight and chooses the next woord until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text last  is chosen.
+    For each word, this algorithm takes the word with the least edge weight and chooses the next woord until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text last is chosen.
     
 <li><b>Random Sentence:</b>
     Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of the given length is created.
