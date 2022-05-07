@@ -10,15 +10,12 @@ TEST_CASE("Highest Weight Sentence - easy", "[easy]") {
   Graph g ("tests/non_greedy1.txt");
   
   test = g.HighestWeightSentence("hello", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "hello.");
   
   test = g.HighestWeightSentence("my", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "my.");
 
   test = g.HighestWeightSentence("dear", 1);
-  std::cout << test << std::endl;
   REQUIRE(test == "dear.");
 
 }
