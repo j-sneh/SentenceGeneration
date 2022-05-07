@@ -21,7 +21,7 @@ Given a text without any punctuation, our code compiles the file as a single con
 
 
 <h2> Algorithms </h2>
-We explored various methods of generating phrases/sentences of a given path length using differening techniques. The traversals we used can be summarized below: <br> <br>
+We explored various methods of generating phrases/sentences of a given path length using differing techniques. The traversals we used can be summarized below: <br> <br>
 
 
 <li>  <b>HighestWeightSentence:</b> 
