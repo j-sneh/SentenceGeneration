@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using std::vector;
 using std::unordered_map;
@@ -67,19 +68,12 @@ public:
     string RandomSentence(string word, size_t length);
 
     /*
-    WriteToCSV:
-    Creates a CSV that displays each word in the form of "element: " and below each word displays its respective adjancency list sorted from larger
+    WriteToTXT:
+    Creates a TXT that displays each word in the form of"element: " and below each word displays its respective adjancency list sorted from larger
     to lower frequency 
     */
-    void WriteToCSV(string filename);
+    void WriteToTXT(string filename);
     /*
-    WriteToCSVRunning:
-    Creates a CSV that displays the adjancency list of a given element sorted from the largest to smallest frequencies, but written as a prefix sum to
-    aid with creating buckets and our Probabilistic Sentence calculation.
-    */
-    void WriteToCSVRunning(string filename);
-    /*
-    WriteAsBFS:
     Uses a BFS to display the entire graph
     */
     void WriteAsBFS(string filename, string start);

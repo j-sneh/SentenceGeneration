@@ -104,7 +104,7 @@ void Graph::BacktrackHelper(const string& word, vector<string>& sentence,size_t 
     
 }
 
-void Graph::WriteToCSV(string filename){
+void Graph::WriteToTXT(string filename){
      std::ofstream text;
      text.open(filename);
      for(auto i: graph){
@@ -115,7 +115,7 @@ void Graph::WriteToCSV(string filename){
         text << "\n";
      }
 }
-void Graph::WriteToCSVRunning(string filename){
+void Graph::WriteToTXTRunning(string filename){
      std::ofstream text;
      text.open(filename);
      for(auto i: graph){
