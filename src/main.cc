@@ -30,23 +30,13 @@ string help() {
      return "";
 }
 
-Graph* create_graph() {
-    cout << endl;
-    string file_path;
-    
-    cout << "What is the filepath of the text file you want to load. Type Enter if you want to load the default (Harry Potter) dataset.";
-    file_path = cin.get();
 
-    // std::cout << "|" + file_path << "|" << std::endl;
-    // std::cout << file_path.size() << std::endl;
-    if(file_path.size() == 1) file_path = "processing/parsed_book.txt";
-    return new Graph(file_path);
-}
-
-int main () {
+int main (int argc, char** argv) {
     int inputChoice;
+    string file_path = argc > 1 ? argv[1] : "processing/parsed_book.txt";
 
-    Graph* g = create_graph();
+
+    Graph* g = new Graph(file_path);
     help();
 
     while (true) {
@@ -67,6 +57,7 @@ int main () {
 
             if (inputChoice == 8) {
                 cout << "Finished.";
+                delete g;
                 std::exit(0);
             }
 
@@ -126,7 +117,7 @@ int main () {
                     g->WriteAsBFS(filepath, start_word);
                     break;
                 case 7:
-                    g->WriteToCSV(filepath);
+                    g->WriteToTXT(filepath);
                     break;
             } 
         }
