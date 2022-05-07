@@ -185,6 +185,9 @@ string Graph::ProbabilisticSentence(string word, size_t length){
     vector<string> sentence;
     sentence.push_back(word);
 
+    if (graph.count(word) == 0) 
+        return "No sentence of length " + std::to_string(length) + " could be generated from word: " + word;
+        
     for(size_t count = 0; count < length - 1; ++count){
         Word& curr_word = graph[word];
         vector< pair<string, size_t> >& curr_buckets = curr_word.buckets;
