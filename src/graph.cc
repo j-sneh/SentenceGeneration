@@ -177,6 +177,7 @@ string Graph::SentenceDecoder(const vector<string>& words){
     }
     sentence.pop_back();
     sentence.push_back('.');
+    sentence.push_back('\n');
     return sentence;
 }
 

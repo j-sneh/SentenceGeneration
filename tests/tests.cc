@@ -25,7 +25,7 @@ TEST_CASE("Highest Weight Sentence - normal", "[normal]"){
   
   test = g.HighestWeightSentence("hello", 2);
   REQUIRE(test == "hello my.");
- 
+
   test = g.HighestWeightSentence("lovely", 2);
   REQUIRE(test == "lovely people.");
 
@@ -33,7 +33,6 @@ TEST_CASE("Highest Weight Sentence - normal", "[normal]"){
   test = g.HighestWeightSentence("lovely", 3);
   REQUIRE(test == "No sentence of length 3 could be generated from word: lovely");
   
-  std::cout << __LINE__ << std::endl;
   test = g.HighestWeightSentence("hello", 3);
   REQUIRE(test == "hello lovely people.");
 }
