@@ -62,19 +62,19 @@ public:
     string LowestGreedySentence(string word, size_t length);
     /*
     Random Sentence:
-    Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
+    Choses words randomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
     */
     string RandomSentence(string word, size_t length);
 
     /*
     WriteToCSV:
-    Creates a CSV that displays each word in the form of"element: " and below each word displays its respective adjancency list sorted from larger
+    Creates a CSV that displays each word in the form of "element: " and below each word displays its respective adjancency list sorted from larger
     to lower frequency 
     */
     void WriteToCSV(string filename);
     /*
     WriteToCSVRunning:
-    Creates a CSV that displays the adjancency list of a given element sorted from thr largest to smallest frequencies, but written as a prefix sum to
+    Creates a CSV that displays the adjancency list of a given element sorted from the largest to smallest frequencies, but written as a prefix sum to
     aid with creating buckets and our Probabilistic Sentence calculation.
     */
     void WriteToCSVRunning(string filename);
