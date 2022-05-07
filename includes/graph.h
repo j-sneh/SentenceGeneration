@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using std::vector;
 using std::unordered_map;

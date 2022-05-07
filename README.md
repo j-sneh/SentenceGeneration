@@ -1,52 +1,53 @@
-# Sentence Generation with Predecessor-Successor Word Pairs
-Final Project for apirani2-shlokm2-abhakat2-jsneh2
+<h1> Sentence Generation with Predecessor-Successor Word Pairs </h1>
+<p>Final Project for apirani2-shlokm2-abhakat2-jsneh2 <p>
 
-Compile the program with `make` in the root directory.
+<br>
+<h2> Running the Code </h2>
+Compile the program with `make` in the root directory. 
 
-Run it like this: `./bin/exec`
+The program should be run on a text file that only contains words and numbers and is space-delimited, with the following command: ```./bin/exec [arg1]```, where <code> arg1 </code> represents the filepath of the text file to be run on.
 
-The program runs on a text file that only contains words and numbers and is space-delimited.
+(Note that most of the examples reference the first book of the Harry Potter series, Harry Potter and the Sorcerer's Stone.)
 
-Our program delves mostly with the first book of the Harry Potter series, Harry Potter and the Sorcerer's Stone.
+<h2> Development Process </h2>
 
-Our preprocessor written in `processing/file_cleaner.py` is applied in the source available at this url
- `https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt`
-though it can be mostly applied to any text.
+<h3> Preprocessing </h3>
+Our preprocessor written in `processing/file_cleaner.py` is applied in the source available at this url <code> https://raw.githubusercontent.com/formcept/whiteboard/master/nbviewer/notebooks/data/harrypotter/Book%201%20-%20The%20Philosopher's%20Stone.txt </code>, but it can be applied to any text file. Our post-processed version of the first book is available at <code>processing/parsed_book.txt</code>.
 
-Our post-processed version of the code is available at `processing/parsed_book.txt`.
+<br>
 
-Our code compiles the text as a single graph removing any punctuation such that is a single connected component. The graph contains a node as well as directed edges to any word that succeeds it in the text. The adjacency list is a pair that all words that succeed a given word in the text as well as the frequency that it appears.
+<h3> The Code</h3>
+Given a text without any punctuation, our code compiles the file as a single connected component. The graph is created as a adjacency list, where each node represents a word and has directed weighted edges to any word that succeeds it in the text. In this case, the weight of any edge is defined as the number of times that the particular predecessor-successor pair occurs.
 
-We explored various methods of generating phrases/sentences of a given path length using various techniques that we listed below.
-The traversals we used can be summarized below.
-```
-    HighestWeightSentence: 
-    Takes a given length and returns most likely sentence for said given length
+
+<h2> Algorithms </h2>
+We explored various methods of generating phrases/sentences of a given path length using differening techniques. The traversals we used can be summarized below: <br> <br>
+
+
+<li>  <b>HighestWeightSentence:</b> 
+    Takes a given length and returns most likely sentence for said given length.
     
-    ProbabilisticSentence:
-    Takes a given length and uses a random to dictate which word to go to next in a phrase using weighted probability
+<li> <b> ProbabilisticSentence: </b>
+    Takes a given length and uses a random to dictate which word to go to next in a phrase using weighted probability.
     
-    HighestGreedySentence:
-    For each word it takes the word with the highest edge weight and chooses that as the next word until it creates a sentence of length, length
-    In case of a tie with edge weights, the word that appears in the text first is chosen.
+<li> <b> HighestGreedySentence: </b>
+    For each word it takes the word with the highest edge weight and chooses that as the next word until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text first is chosen.
     
-    LowestGreedySentence:
-    For each word it takes the word with the least edge weight and chooses the next woord until it creates a sentence of length, length
-    In case of a tie with edge weights, the word that appears in the text last  is chosen
+<li><b>LowestGreedySentence:</b>
+    For each word it takes the word with the least edge weight and chooses the next woord until it creates a sentence of the given length. In case of a tie with edge weights, the word that appears in the text last  is chosen.
     
-    Random Sentence:
-    Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
+<li><b>Random Sentence:</b>
+    Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of the given length is created.
     
-    WriteToCSV:
-    Creates a CSV that displays each word in the form of"element: " and below each word displays its respective adjancency list sorted from larger
-    to lower frequency 
+<li><b>WriteToCSV:</b>
+    Creates a CSV that displays each word in the form of"element: " and below each word displays its respective adjancency list sorted from larger to lower frequency. 
     
-    WriteAsBFS:
-    Uses a BFS to display the entire graph
-    
-```
+<li><b>WriteAsBFS:</b>
+    Uses a BFS to display the entire graph.
+
 The above descriptions are also documented in our `graph.h` file.
 
+<h3> Tests </h3>
 Custom test cases that we wrote to test our implementation can be found on `tests/non_greedy1.txt` and `tests/non_greedy2.txt`.
 The test cases are available on `tests/tests.cc` and can be tested by typing `make tests` followed by `./bin/tests` in the terminal in the root folder.
 
