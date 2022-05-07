@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using std::vector;
 using std::unordered_map;
@@ -62,7 +63,7 @@ public:
     string LowestGreedySentence(string word, size_t length);
     /*
     Random Sentence:
-    Choses words andomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
+    Choses words randomly from the adjacency list disregarding the given edge weights until a sentence of length, length, is created
     */
     string RandomSentence(string word, size_t length);
 
@@ -73,13 +74,6 @@ public:
     */
     void WriteToTXT(string filename);
     /*
-    WriteToTXTRunning:
-    Creates a TXT that displays the adjancency list of a given element sorted from thr largest to smallest frequencies, but written as a prefix sum to
-    aid with creating buckets and our Probabilistic Sentence calculation.
-    */
-    void WriteToTXTRunning(string filename);
-    /*
-    WriteAsBFS:
     Uses a BFS to display the entire graph
     */
     void WriteAsBFS(string filename, string start);

@@ -115,18 +115,6 @@ void Graph::WriteToTXT(string filename){
         text << "\n";
      }
 }
-void Graph::WriteToTXTRunning(string filename){
-     std::ofstream text;
-     text.open(filename);
-     for(auto i: graph){
-        text << "element: " << i.first << "\n";
-        for(auto& pair : graph[i.first].buckets){
-
-            text << pair.first << ": " <<  pair.second << " " ;
-        }
-        text << "\n";
-     }
-}
 
 void Graph::WriteAsBFS(string filename, string start) {
     std::ofstream text;
