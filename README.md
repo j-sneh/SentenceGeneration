@@ -31,7 +31,7 @@ The traversals we used can be summarized below.
     In case of a tie with edge weights, the word that appears in the text first is chosen.
     
     LowestGreedySentence:
-    For each word it takes the word with the least edge weight and chooses the next woord until it creates a sentence of length, length
+    For each word it takes the word with the least edge weight and chooses the next word until it creates a sentence of length, length
     In case of a tie with edge weights, the word that appears in the text last  is chosen
     
     Random Sentence:
